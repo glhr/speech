@@ -23,15 +23,15 @@ def load_deepspeech_model():
 ds = load_deepspeech_model()
 
 
-def stt_deepspeech(audio):
-    return ds.stt(audio)
+def stt_deepspeech(filename):
+    wav = utils.load_audio_from_wav(filename)
+    return ds.stt(wav)
 
 
 if __name__ == "__main__":
     try:
-        wav = utils.load_audio_from_wav()
-    except Exception:
+        text = stt_deepspeech("output.wav")
+    except FileNotFoundError:
         utils.record_audio()
-        wav = utils.load_audio_from_wav()
-    text = stt_deepspeech(wav)
+        text = stt_deepspeech("output.wav")
     print(text)

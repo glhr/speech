@@ -5,7 +5,7 @@ import utils
 clear_flag = 1
 
 
-def stt_google(filename=""):
+def stt_google(filename):
     # Set American English
     global clear_flag
     try:
