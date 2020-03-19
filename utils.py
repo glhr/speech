@@ -16,6 +16,14 @@ def record_audio():
             file.write(audio.get_wav_data())
         return r, audio
 
-def load_audio(filename="output.wav"):
+
+def load_audio_as_source(filename="output.wav"):
+    # use the audio file as the audio source
+    with sr.AudioFile(filename) as source:
+        audio = r.record(source)  # read the entire audio file
+        return r, audio
+
+
+def load_audio_from_wav(filename="output.wav"):
     _, audio = wav.read(filename)
     return audio

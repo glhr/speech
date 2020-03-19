@@ -23,16 +23,15 @@ def load_deepspeech_model():
 ds = load_deepspeech_model()
 
 
-def deepspeech(audio):
+def stt_deepspeech(audio):
     return ds.stt(audio)
 
 
-def generate_text(audio, method='deepspeech'):
-    return deepspeech(audio)
-
-
 if __name__ == "__main__":
-    r, audio = utils.record_audio()
-    wav = utils.load_audio()
-    text = generate_text(wav, method='deepspeech')
+    try:
+        wav = utils.load_audio_from_wav()
+    except Exception:
+        utils.record_audio()
+        wav = utils.load_audio_from_wav()
+    text = stt_deepspeech(wav)
     print(text)

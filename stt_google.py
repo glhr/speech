@@ -5,10 +5,14 @@ import utils
 clear_flag = 1
 
 
-def speech_to_text():
+def stt_google(filename=""):
     # Set American English
     global clear_flag
-    r, audio = utils.record_audio()
+    try:
+        r, audio = utils.load_audio_as_source(filename)
+    except Exception as e:
+        print(e)
+        r, audio = utils.record_audio()
     human_said = ""
     try:
         human_said = r.recognize_google(audio, language="en-US")
@@ -21,5 +25,5 @@ def speech_to_text():
 
 
 if __name__ == "__main__":
-    text = speech_to_text()
+    text = stt_google(filename="output.wav")
     print(text)
