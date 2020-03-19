@@ -1,8 +1,4 @@
-import pyaudio
-import deepspeech
 from deepspeech import Model
-# import scipy.io.wavfile as wav
-# import speech_recognition as sr
 import utils
 
 from pathlib import Path

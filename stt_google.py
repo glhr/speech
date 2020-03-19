@@ -1,4 +1,3 @@
-# import speech_recognition as sr
 import utils
 
 # Global parameters
@@ -6,8 +5,6 @@ clear_flag = 1
 
 
 def stt_google(filename):
-    # Set American English
-    global clear_flag
     try:
         r, audio = utils.load_audio_as_source(filename)
     except Exception as e:
@@ -15,12 +12,10 @@ def stt_google(filename):
         r, audio = utils.record_audio()
     human_said = ""
     try:
-        human_said = r.recognize_google(audio, language="en-US")
-        clear_flag = 1
+        human_said = r.recognize_google(audio, language="en-US") # Set American English
         return human_said.lower()
     except Exception as e:
         print(e)
-        clear_flag = 0
         return None
 
 
