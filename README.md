@@ -1,13 +1,15 @@
 ## Use-guide
 
+Currently supported methods:
+* Google from [SpeechRecognition](https://github.com/Uberi/speech_recognition)
+* [DeepSpeech](https://github.com/mozilla/DeepSpeech) by Mozilla
+
 Run:
 ```shell
 python3 stt_wrapper.py # use default STT method
 python3 stt_wrapper.py deepspeech # specify STT method
 ```
 the script will try to find a file called "output.wav" in the root directory. If it doesn't exist, it will record audio and save it as "output.wav". It will then transcribe the audio file using the specified method, or the default method (Google from SpeechRecognition) if no argument is provided.
-
-Currently supported methods: Google from SpeechRecognition, DeepSpeech by Mozilla
 
 Here's how you can use this Speech-to-Text wrapper from a script:
 

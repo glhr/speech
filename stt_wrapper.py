@@ -1,4 +1,5 @@
 def generate_text(filename, method='google'):
+    method = method.lower()
     if method == 'deepspeech':
         from stt_deepspeech import stt_deepspeech
         return stt_deepspeech(filename)
