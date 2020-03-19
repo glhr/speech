@@ -4,7 +4,7 @@ import scipy.io.wavfile as wav
 r = sr.Recognizer()
 
 
-def record_audio():
+def record_audio(filename="output.wav"):
     with sr.Microphone(sample_rate=48000, chunk_size=2048) as source:
         # Adjusts the energy threshold dynamically using audio from source (an AudioSource instance) to account for ambient noise.
         print("Please wait one second for calibrating microphone...")
@@ -12,7 +12,7 @@ def record_audio():
         print("Ok, I am ready...")
         r.dynamic_energy_threshold = True
         audio = r.listen(source)
-        with open("output.wav", "wb") as file:
+        with open(filename, "wb") as file:
             file.write(audio.get_wav_data())
         return r, audio
 
