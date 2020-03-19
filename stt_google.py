@@ -1,4 +1,7 @@
-import utils
+try:
+    import utils
+except ImportError:
+    import speech.utils as utils
 
 # Global parameters
 clear_flag = 1

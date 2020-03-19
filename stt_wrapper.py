@@ -1,10 +1,16 @@
 def generate_text(filename, method='google'):
     method = method.lower()
     if method == 'deepspeech':
-        from stt_deepspeech import stt_deepspeech
+        try:
+            from stt_deepspeech import stt_deepspeech
+        except ImportError:
+            from speech.stt_deepspeech import stt_deepspeech
         return stt_deepspeech(filename)
     elif method == 'google':
-        from stt_google import stt_google
+        try:
+            from stt_google import stt_google
+        except:
+            from speech.stt_google import stt_google
         return stt_google(filename)
     else:
         print("Unknown Speech-to-Text method provided")

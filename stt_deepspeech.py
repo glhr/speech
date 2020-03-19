@@ -1,8 +1,10 @@
 from deepspeech import Model
-import utils
+try:
+    import utils
+except ImportError:
+    import speech.utils as utils
 
-from pathlib import Path
-dirpath = str(Path(__file__).parent.absolute())
+dirpath = utils.get_current_directory()
 
 
 def load_deepspeech_model():

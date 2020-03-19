@@ -1,7 +1,16 @@
 import speech_recognition as sr
 import scipy.io.wavfile as wav
+from pathlib import Path
 
 r = sr.Recognizer()
+
+
+def get_current_directory():
+    return str(Path(__file__).parent.absolute())
+
+
+def get_path_from_filename(filename):
+    return get_current_directory() + '/' + filename
 
 
 def record_audio(filename="output.wav"):
@@ -12,18 +21,18 @@ def record_audio(filename="output.wav"):
         print("Ok, I am ready...")
         r.dynamic_energy_threshold = True
         audio = r.listen(source)
-        with open(filename, "wb") as file:
+        with open(get_path_from_filename(filename), "wb") as file:
             file.write(audio.get_wav_data())
         return r, audio
 
 
 def load_audio_as_source(filename):
     # use the audio file as the audio source
-    with sr.AudioFile(filename) as source:
+    with sr.AudioFile(get_path_from_filename(filename)) as source:
         audio = r.record(source)  # read the entire audio file
         return r, audio
 
 
 def load_audio_from_wav(filename):
-    _, audio = wav.read(filename)
+    _, audio = wav.read(get_path_from_filename(filename))
     return audio
