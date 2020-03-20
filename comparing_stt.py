@@ -5,7 +5,7 @@ import json
 
 logger = utils.get_logger()
 # list of supported speech recognition methods
-methods = ['google']
+methods = ['google','sphinx']
 
 with open('audio/dataset.json') as f:
     data = json.load(f)['data']
@@ -21,6 +21,6 @@ with open('audio/dataset.json') as f:
                 diff = [word for word in expected if word not in output]
 
                 logger.info("--> {}: {}".format(method, text))
-                logger.info("----> {} incorrect word(s) ".format(len(diff), diff))
+                logger.warn("----> {} incorrect word(s) ".format(len(diff), diff))
             except Exception as e:
                 logger.error(e)

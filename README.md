@@ -9,7 +9,7 @@ Run:
 python3 stt_wrapper.py # use default STT method
 python3 stt_wrapper.py deepspeech # specify STT method
 ```
-the script will try to find a file called "output.wav" in the root directory. If it doesn't exist, it will record audio and save it as "output.wav". It will then transcribe the audio file using the specified method, or the default method (Google from SpeechRecognition) if no argument is provided.
+the script will try to find a file called `output.wav` in the `audio` directory. If it doesn't exist, it will record audio and save it as `output.wav`. It will then transcribe the audio file using the specified method, or the default method (Google from SpeechRecognition) if no argument is provided.
 
 Here's how you can use this Speech-to-Text wrapper from a script:
 
@@ -35,6 +35,12 @@ python3 -m pip install pyaudio
 
 ```shell
 python3 -m pip install speechrecognition
+```
+
+**PocketSphinx**
+```shell
+sudo apt-get install python python-all-dev python-pip build-essential swig git libpulse-dev libasound2-dev
+python3 -m pip install pocketsphinx
 ```
 
 **DeepSpeech**
