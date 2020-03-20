@@ -6,6 +6,17 @@ except ImportError:
 logger = utils.get_logger()
 
 
+def stt_wit(filename):
+    ACCESS_TOKEN = "6KZOTYV2QOYHSZZQ34NL7YI67OO7MO37"
+    r, audio = utils.load_audio_as_source(filename)
+    try:
+        human_said = r.recognize_wit(audio, key=ACCESS_TOKEN)
+        return human_said.lower()
+    except Exception as e:
+        logger.error(e)
+        return None
+
+
 def stt_google(filename):
     r, audio = utils.load_audio_as_source(filename)
     try:

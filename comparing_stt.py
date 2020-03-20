@@ -5,7 +5,7 @@ import pandas as pd
 
 logger = utils.get_logger()
 # list of supported speech recognition methods
-methods = ['google', 'sphinx', 'deepspeech']
+methods = ['google', 'wit', 'sphinx', 'deepspeech']
 # methods = ['google']
 
 results = {}
