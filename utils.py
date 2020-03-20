@@ -10,7 +10,7 @@ def get_current_directory():
 
 
 def get_path_from_filename(filename):
-    return get_current_directory() + '/' + filename
+    return get_current_directory() + '/audio/' + filename
 
 
 def record_audio(filename="output.wav"):

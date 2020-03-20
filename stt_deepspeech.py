@@ -23,6 +23,8 @@ ds = load_deepspeech_model()
 
 def stt_deepspeech(filename):
     wav = utils.load_audio_from_wav(filename)
+    if len(wav.shape) > 1:  # if audio is stereo, just pick one channel
+        wav = wav[:,0]
     return ds.stt(wav)
 
 

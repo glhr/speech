@@ -1,0 +1,32 @@
+{
+  "data": [
+  {
+    "file": "output_11d62d64c85f447da7032d372a6fdd4e.wav",
+    "phrase": "I want you to pick up the orange"
+  },
+  {
+    "file": "Data_Jan.wav",
+    "phrase": "can you pick up the banana on the left"
+  },
+  {
+    "file": "Rune_speach.wav",
+    "phrase": "hello robot can you please pick up the yellow fruit in front of you"
+  },
+  {
+    "file": "Lars_1.wav",
+    "phrase": "pick up the blue ball for me"
+  },
+  {
+    "file": "Lars_2.wav",
+    "phrase": "move the banana to the left side of the table"
+  },
+  {
+    "file": "Lars_3.wav",
+    "phrase": "can you find a pencil for me"
+  },
+  {
+    "file": "pernille.wav",
+    "phrase": "i would like you to give me an apple please"
+  }
+  ]
+}
