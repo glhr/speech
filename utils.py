@@ -1,5 +1,6 @@
 import speech_recognition as sr
 import scipy.io.wavfile as wav
+from asr_evaluation import asr_evaluation as eval
 from pathlib import Path
 import coloredlogs,logging
 import os
@@ -51,3 +52,48 @@ def load_audio_as_source(filename):
 def load_audio_from_wav(filename):
     _, audio = wav.read(get_path_from_filename(filename))
     return audio
+
+def reset_eval_variables():
+    # Some defaults
+    eval.print_instances_p = False
+    eval.print_errors_p = False
+    eval.files_head_ids = False
+    eval.files_tail_ids = False
+    eval.confusions = False
+    eval.min_count = 0
+    eval.wer_vs_length_p = True
+
+    # For keeping track of the total number of tokens, errors, and matches
+    eval.ref_token_count = 0
+    eval.error_count = 0
+    eval.match_count = 0
+    eval.counter = 0
+    eval.sent_error_count = 0
+
+def evaluate_results(expected_list, output_list):
+    counter = 0
+    # Loop through each line of the reference and hyp file
+    for ref_line, hyp_line in zip(expected_list, output_list):
+        processed_p = eval.process_line_pair(ref_line, hyp_line, case_insensitive=True)
+        if processed_p:
+            counter += 1
+    # if eval.confusions:
+    #     eval.print_confusions()
+    # if eval.wer_vs_length_p:
+        # eval.print_wer_vs_length()
+    # Compute WER and WRR
+    if eval.ref_token_count > 0:
+        wrr = eval.match_count / eval.ref_token_count
+        wer = eval.error_count / eval.ref_token_count
+    else:
+        wrr = 0.0
+        wer = 0.0
+    # Compute SER
+    if counter > 0:
+        ser = eval.sent_error_count / counter
+    else:
+        ser = 0.0
+    print('Sentence count: {}'.format(counter))
+    print('WER: {:10.3%} ({:10d} / {:10d})'.format(wer, eval.error_count, eval.ref_token_count))
+    print('WRR: {:10.3%} ({:10d} / {:10d})'.format(wrr, eval.match_count, eval.ref_token_count))
+    print('SER: {:10.3%} ({:10d} / {:10d})'.format(ser, eval.sent_error_count, counter))
