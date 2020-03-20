@@ -2,6 +2,7 @@
 
 Currently supported methods:
 * Google from [SpeechRecognition](https://github.com/Uberi/speech_recognition)
+* Sphinx from [SpeechRecognition](https://github.com/Uberi/speech_recognition)
 * [DeepSpeech](https://github.com/mozilla/DeepSpeech) by Mozilla
 
 Run:
@@ -17,7 +18,7 @@ Here's how you can use this Speech-to-Text wrapper from a script:
 from stt_wrapper import generate_text
 
 filename = "output.wav"
-for method in ['google', 'deepspeech']:
+for method in ['google', 'sphinx', 'deepspeech']:
     text = generate_text(filename, method=method)
     print("--> {}: {}".format(method, text))
 ```
@@ -39,7 +40,7 @@ python3 -m pip install speechrecognition
 
 **PocketSphinx**
 ```shell
-sudo apt-get install python python-all-dev python-pip build-essential swig git libpulse-dev libasound2-dev
+sudo apt-get install python-all-dev python-pip build-essential swig git libpulse-dev libasound2-dev
 python3 -m pip install pocketsphinx
 ```
 
