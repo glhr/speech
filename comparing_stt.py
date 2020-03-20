@@ -5,7 +5,7 @@ import json
 
 logger = utils.get_logger()
 # list of supported speech recognition methods
-methods = ['google','sphinx']
+methods = ['google', 'sphinx', 'deepspeech']
 
 with open('audio/dataset.json') as f:
     data = json.load(f)['data']
@@ -13,7 +13,7 @@ with open('audio/dataset.json') as f:
         logger.debug("{} ({})".format(recording['phrase'].lower(), recording['file']))
         for method in methods:
             try:
-                text = generate_text(recording['file'], method=method)
+                text = generate_text('resampled/'+recording['file'], method=method)
 
                 # compute ratio of correct words
                 expected = recording['phrase'].lower().split()
