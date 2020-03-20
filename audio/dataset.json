@@ -23,6 +23,22 @@
   {
     "file": "pernille.wav",
     "phrase": "i would like you to give me an apple please"
+  },
+  {
+    "file": "2020_03_20_16_30_13.wav",
+    "phrase": "hey robot can you pick up and throw an apple at gala's head please thank you"
+  },
+  {
+    "file": "2020_03_20_16_30_46.wav",
+    "phrase": "hey robot can you hand me a piece of fruit"
+  },
+  {
+    "file": "2020_03_20_16_30_54.wav",
+    "phrase": "hey robot high five"
+  },
+  {
+    "file": "2020_03_20_17_16_56.wav",
+    "phrase": "hello you robot play music hi i would like to look for a recipe can you find aalborg in google maps"
   }
   ]
 }

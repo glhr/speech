@@ -96,12 +96,12 @@ def evaluate_results(expected_list, output_list):
     else:
         ser = 0.0
     logger.debug('Sentence count: {}'.format(counter))
-    logger.debug('WER: {:10.3%} ({:10d} / {:10d})'.format(wer, eval.error_count, eval.ref_token_count))
-    logger.debug('WRR: {:10.3%} ({:10d} / {:10d})'.format(wrr, eval.match_count, eval.ref_token_count))
+    logger.debug('WRR: {:10.3%} ({:10d} / {:10d})'.format(1-wer, eval.error_count, eval.ref_token_count))
+    logger.debug('WCR: {:10.3%} ({:10d} / {:10d})'.format(wrr, eval.match_count, eval.ref_token_count))
     logger.debug('SER: {:10.3%} ({:10d} / {:10d})'.format(ser, eval.sent_error_count, counter))
 
     return {
-            'wer': wer,
-            'wrr': wrr,
+            'wrr': 1-wer,
+            'wcr': wrr,
             'ser': ser
             }
