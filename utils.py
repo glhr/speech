@@ -53,6 +53,7 @@ def load_audio_from_wav(filename):
     _, audio = wav.read(get_path_from_filename(filename))
     return audio
 
+
 def reset_eval_variables():
     # Some defaults
     eval.print_instances_p = False
@@ -70,11 +71,12 @@ def reset_eval_variables():
     eval.counter = 0
     eval.sent_error_count = 0
 
+
 def evaluate_results(expected_list, output_list):
     counter = 0
-    # Loop through each line of the reference and hyp file
+    # Loop through each line of the reference and hypothesis
     for ref_line, hyp_line in zip(expected_list, output_list):
-        processed_p = eval.process_line_pair(ref_line, hyp_line, case_insensitive=True)
+        processed_p = eval.process_line_pair(ref_line, hyp_line, case_insensitive = True)
         if processed_p:
             counter += 1
     # if eval.confusions:
@@ -93,7 +95,13 @@ def evaluate_results(expected_list, output_list):
         ser = eval.sent_error_count / counter
     else:
         ser = 0.0
-    print('Sentence count: {}'.format(counter))
-    print('WER: {:10.3%} ({:10d} / {:10d})'.format(wer, eval.error_count, eval.ref_token_count))
-    print('WRR: {:10.3%} ({:10d} / {:10d})'.format(wrr, eval.match_count, eval.ref_token_count))
-    print('SER: {:10.3%} ({:10d} / {:10d})'.format(ser, eval.sent_error_count, counter))
+    logger.debug('Sentence count: {}'.format(counter))
+    logger.debug('WER: {:10.3%} ({:10d} / {:10d})'.format(wer, eval.error_count, eval.ref_token_count))
+    logger.debug('WRR: {:10.3%} ({:10d} / {:10d})'.format(wrr, eval.match_count, eval.ref_token_count))
+    logger.debug('SER: {:10.3%} ({:10d} / {:10d})'.format(ser, eval.sent_error_count, counter))
+
+    return {
+            'wer': wer,
+            'wrr': wrr,
+            'ser': ser
+            }

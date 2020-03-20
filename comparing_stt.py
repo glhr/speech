@@ -1,12 +1,12 @@
-
 from stt_wrapper import generate_text
 import utils
 import json
-
+import pandas as pd
 
 logger = utils.get_logger()
 # list of supported speech recognition methods
 methods = ['google', 'sphinx', 'deepspeech']
+# methods = ['google']
 
 results = {}
 
@@ -30,8 +30,16 @@ with open('audio/dataset.json') as f:
             except Exception as e:
                 logger.error(e)
 
-# print evaluation results
+metrics_full = []
+# print and store evaluation results
 for method in methods:
     logger.info("Evaluation - {}".format(method))
-    utils.evaluate_results(results[method].keys(), results[method].values())
+    metrics = utils.evaluate_results(results[method].keys(), results[method].values())
     utils.reset_eval_variables()
+    metrics['method'] = method
+    metrics_full.append(metrics)
+
+df = pd.DataFrame(metrics_full)
+df = df.set_index('method')
+print(df)
+df.to_csv('audio/results.csv', encoding='utf-8', index=True)
