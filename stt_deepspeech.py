@@ -1,11 +1,11 @@
-from deepspeech import Model
 try:
     import utils
 except ImportError:
     import speech.utils as utils
+from deepspeech import Model
 
 dirpath = utils.get_current_directory()
-
+logger = utils.get_logger()
 
 def load_deepspeech_model():
     N_FEATURES = 25
@@ -34,4 +34,4 @@ if __name__ == "__main__":
     except FileNotFoundError:
         utils.record_audio()
         text = stt_deepspeech("output.wav")
-    print(text)
+    logger.info(text)
