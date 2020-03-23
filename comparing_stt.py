@@ -12,6 +12,7 @@ methods = ['deepspeech', 'google', 'wit', 'sphinx', 'houndify']
 
 results = {}
 timings = {}
+N_PHRASES = 12
 
 with open('audio/dataset.json') as f:
     data = json.load(f)['data']
@@ -44,7 +45,7 @@ for method in methods:
     metrics = utils.evaluate_results(results[method].keys(), results[method].values())
     utils.reset_eval_variables()
     metrics['method'] = method
-    metrics['time'] = np.sum(timings[method])
+    metrics['time'] = np.sum(timings[method]) / N_PHRASES
     metrics_full.append(metrics)
 
 df = pd.DataFrame(metrics_full)
