@@ -17,6 +17,18 @@ def stt_wit(filename):
         return None
 
 
+def stt_houndify(filename):
+    ID = "GiNhNfW-OgOlHG3PaDzI9Q=="
+    KEY = "Eo4j32ukHBVTkTXfGcKfGzuKyQQiIKaYWsS3yYcOYrEETg-xvI1tkNZg9lSW832ncQux3NPKfiN60mCB4FQx4g=="
+    r, audio = utils.load_audio_as_source(filename)
+    try:
+        human_said = r.recognize_houndify(audio, client_id=ID, client_key=KEY)
+        return human_said.lower()
+    except Exception as e:
+        logger.error(e)
+        return None
+
+
 def stt_google(filename):
     r, audio = utils.load_audio_as_source(filename)
     try:

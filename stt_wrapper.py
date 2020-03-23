@@ -6,9 +6,9 @@ def generate_text(filename, method='google'):
         except ImportError:
             from speech.stt_deepspeech import stt_deepspeech
         return stt_deepspeech(filename)
-    elif method in ['google', 'sphinx', 'wit']:  # methods from SpeechRecognition package
+    elif method in ['google', 'sphinx', 'wit', 'houndify']:  # methods from SpeechRecognition package
         try:
-            from stt_sr import stt_google, stt_sphinx, stt_wit
+            from stt_sr import stt_google, stt_sphinx, stt_wit, stt_houndify
         except ImportError:
             from speech.stt_sr import stt_google, stt_sphinx
         if method == 'google':
@@ -17,6 +17,8 @@ def generate_text(filename, method='google'):
             return stt_sphinx(filename)
         elif method == 'wit':
             return stt_wit(filename)
+        elif method == 'houndify':
+            return stt_houndify(filename)
     else:
         print("Unknown Speech-to-Text method provided")
 
