@@ -128,3 +128,4 @@ deepspeech-0.6.1-models/
 *.gz
 
 *.wav
+!audio/resampled/**
