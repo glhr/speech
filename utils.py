@@ -74,11 +74,18 @@ def reset_eval_variables():
 
 def evaluate_results(expected_list, output_list):
     counter = 0
-    # Loop through each line of the reference and hypothesis
-    for ref_line, hyp_line in zip(expected_list, output_list):
-        processed_p = eval.process_line_pair(ref_line, hyp_line, case_insensitive = True)
+
+    if isinstance(expected_list, str):  # if a single sentence pair is given
+        SINGLE_PAIR = True
+        processed_p = eval.process_line_pair(expected_list, output_list, case_insensitive = True)
         if processed_p:
             counter += 1
+    else:  # loop through each line of the reference and hypothesis
+        SINGLE_PAIR = False
+        for ref_line, hyp_line in zip(expected_list, output_list):
+            processed_p = eval.process_line_pair(ref_line, hyp_line, case_insensitive = True)
+            if processed_p:
+                counter += 1
     # if eval.confusions:
     #     eval.print_confusions()
     # if eval.wer_vs_length_p:
@@ -95,10 +102,12 @@ def evaluate_results(expected_list, output_list):
         ser = eval.sent_error_count / counter
     else:
         ser = 0.0
-    logger.debug('Sentence count: {}'.format(counter))
-    logger.debug('WRR: {:10.3%} ({:10d} / {:10d})'.format(1-wer, eval.error_count, eval.ref_token_count))
-    logger.debug('WCR: {:10.3%} ({:10d} / {:10d})'.format(wrr, eval.match_count, eval.ref_token_count))
-    logger.debug('SER: {:10.3%} ({:10d} / {:10d})'.format(ser, eval.sent_error_count, counter))
+
+    if not SINGLE_PAIR:
+        logger.debug('Sentence count: {}'.format(counter))
+        logger.debug('WRR: {:10.3%} ({:10d} / {:10d})'.format(1-wer, eval.error_count, eval.ref_token_count))
+        logger.debug('WCR: {:10.3%} ({:10d} / {:10d})'.format(wrr, eval.match_count, eval.ref_token_count))
+        logger.debug('SER: {:10.3%} ({:10d} / {:10d})'.format(ser, eval.sent_error_count, counter))
 
     return {
             'wrr': 1-wer,

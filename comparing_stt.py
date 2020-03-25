@@ -12,43 +12,66 @@ methods = ['deepspeech', 'google', 'wit', 'sphinx', 'houndify']
 
 results = {}
 timings = {}
-N_PHRASES = 12
+
+count = 0   # number of sentences processed
+N_MAX = 20  # maximum number of sentences to process
+
+metrics_full = []
+metrics_summary = []
 
 with open('audio/dataset.json') as f:
     data = json.load(f)['data']
     for recording in data:
-        expected = recording['phrase'].lower()
+        count += 1
+        if count > N_MAX:
+            break
 
+        expected = recording['phrase'].lower()
         logger.debug("{} ({})".format(expected, recording['file']))
+
         for method in methods:
             try:
                 inference_start = timer()
                 output = generate_text('resampled/'+recording['file'], method=method)
                 inference_end = timer() - inference_start
                 # diff = [word for word in expected if word not in output]
+
                 try:
                     results[method][expected] = output
-                    timings[method].append(inference_end)
+                    timings[method][expected] = inference_end
                 except KeyError:
                     results[method] = {expected: output}
-                    timings[method] = [inference_end]
+                    timings[method] = {expected: inference_end}
+                metrics = utils.evaluate_results(expected, output)
+                utils.reset_eval_variables()
+
+                metrics['method'] = method
+                metrics['time'] = inference_end
+                metrics_full.append(metrics)
 
                 logger.info("--> {}: {} ({:.3f} s)".format(method, output, inference_end))
                 # logger.warn("----> {} incorrect word(s) ".format(len(diff), diff))
             except Exception as e:
                 logger.error(e)
 
-metrics_full = []
-# print and store evaluation results
+# store evaluation results
+
+df = pd.DataFrame(metrics_full)
+# df = df.set_index('method')
+print(df)
+df.to_csv('audio/results_full.csv', encoding='utf-8', index=True)
+
+
+N_PHRASES = len(results[method].keys())
 for method in methods:
     logger.info("Evaluation - {}".format(method))
     metrics = utils.evaluate_results(results[method].keys(), results[method].values())
     utils.reset_eval_variables()
     metrics['method'] = method
-    metrics['time'] = np.sum(timings[method]) / N_PHRASES
-    metrics_full.append(metrics)
+    metrics['time'] = np.sum(list(timings[method].values())) / N_PHRASES
+    metrics_summary.append(metrics)
 
-df = pd.DataFrame(metrics_full)
+df = pd.DataFrame(metrics_summary)
 df = df.set_index('method')
 print(df)
-df.to_csv('audio/results.csv', encoding='utf-8', index=True)
+df.to_csv('audio/results_summary.csv', encoding='utf-8', index=True)
