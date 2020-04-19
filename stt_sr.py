@@ -1,7 +1,7 @@
 try:
-    import utils
+    import speechutils as utils
 except ImportError:
-    import speech.utils as utils
+    import speech.speechutils as utils
 
 logger = utils.get_logger()
 
