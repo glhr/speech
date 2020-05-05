@@ -66,3 +66,6 @@ def mozilla(sentence, OUT_FILE):
 
 def generate_speech(sentence, OUT_FILE):
     mozilla(sentence,OUT_FILE)
+
+if __name__ == "__main__":
+    generate_speech("Hello Lars this sounds amazing I am offended","test1.wav")

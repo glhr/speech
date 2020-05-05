@@ -1,9 +1,13 @@
 ## Use-guide
 
+### Speech-to-Text
 Currently supported methods:
 * Google from [SpeechRecognition](https://github.com/Uberi/speech_recognition)
 * Sphinx from [SpeechRecognition](https://github.com/Uberi/speech_recognition)
+* Houndify from [SpeechRecognition](https://github.com/Uberi/speech_recognition)
+* Wit from [SpeechRecognition](https://github.com/Uberi/speech_recognition)
 * [DeepSpeech](https://github.com/mozilla/DeepSpeech) by Mozilla
+
 
 Run:
 ```shell
@@ -23,19 +27,26 @@ for method in ['google', 'sphinx', 'deepspeech']:
     print("--> {}: {}".format(method, text))
 ```
 
+### Text-to-Speech
+
+```shell
+python3 tts_pyttsx3.py
+python3 tts_mozilla.py
+```
+
 ## Requirements
+
+```shell
+python3 -m pip install --user -r requirements.txt
+```
+
+### Additional dependencies
 
 **PyAudio**
 
 ```shell
 sudo apt-get install -y portaudio19-dev python-pyaudio python3-pyaudio
 python3 -m pip install pyaudio
-```
-
-**SpeechRecognition**
-
-```shell
-python3 -m pip install speechrecognition
 ```
 
 **PocketSphinx**
@@ -47,10 +58,13 @@ python3 -m pip install pocketsphinx
 **DeepSpeech**
 
 ```shell
-# Install
-python3 -m pip install deepspeech
-
 # Download pre-trained English model and extract
 curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.6.1/deepspeech-0.6.1-models.tar.gz
 tar xvf deepspeech-0.6.1-models.tar.gz
+```
+
+**TTS**
+```shell
+git clone https://github.com/mozilla/TTS.git
+cd TTS & python setup.py develop --user
 ```

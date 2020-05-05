@@ -10,7 +10,7 @@ def generate_text(filename, method='google'):
         try:
             from stt_sr import stt_google, stt_sphinx, stt_wit, stt_houndify
         except ImportError:
-            from speech.stt_sr import stt_google, stt_sphinx
+            from speech.stt_sr import stt_google, stt_sphinx, stt_wit, stt_houndify
         if method == 'google':
             return stt_google(filename)
         elif method == 'sphinx':

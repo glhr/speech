@@ -1,0 +1,12 @@
+asr_evaluation==2.0.4
+scipy==1.4.1
+deepspeech==0.6.1
+pandas==1.0.1
+coloredlogs==10.0
+SpeechRecognition==3.8.1
+numpy==1.18.1
+pyttsx3==2.87
+speech==0.5.2
+torch==1.5.0
+TTS==1.1
+utils==1.0.1
