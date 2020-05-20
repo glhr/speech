@@ -39,6 +39,22 @@
   {
     "file": "2020_03_20_17_16_56.wav",
     "phrase": "hello you robot play music hi i would like to look for a recipe can you find aalborg in google maps"
+  },
+  {
+    "file": "gala1.wav",
+    "phrase": "hey buddy could you pick up this peach and place it on the table please"
+  },
+  {
+    "file": "gala2.wav",
+    "phrase": "ok robot now i'm going to ask you to do something for me"
+  },
+  {
+    "file": "gala3.wav",
+    "phrase": "no you can't do that that's wrong stop"
+  },
+  {
+    "file": "gala4.wav",
+    "phrase": "so what i want you to do is find a banana and grab it with your left arm"
   }
   ]
 }

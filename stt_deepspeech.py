@@ -14,7 +14,7 @@ def load_deepspeech_model():
     LM_ALPHA = 0.75
     LM_BETA = 1.85
 
-    ds = Model(dirpath + '/deepspeech-0.6.1-models/output_graph.pbmm', BEAM_WIDTH)
+    ds = Model(dirpath + '/deepspeech-0.7.1-models.pbmm')
     # logger.debug("DeepSpeech sample rate {}".format(ds.sampleRate()))
     return ds
 

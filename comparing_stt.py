@@ -1,5 +1,5 @@
 from stt_wrapper import generate_text
-import utils
+import speechutils as utils
 import json
 import pandas as pd
 import numpy as np
@@ -27,7 +27,7 @@ with open('audio/dataset.json') as f:
             break
 
         expected = recording['phrase'].lower()
-        logger.debug("{} ({})".format(expected, recording['file']))
+        print("{} ({})".format(expected, recording['file']))
 
         for method in methods:
             try:
@@ -49,10 +49,10 @@ with open('audio/dataset.json') as f:
                 metrics['time'] = inference_end
                 metrics_full.append(metrics)
 
-                logger.info("--> {}: {} ({:.3f} s)".format(method, output, inference_end))
+                print("--> {}: {} ({:.3f} s)".format(method, output, inference_end))
                 # logger.warn("----> {} incorrect word(s) ".format(len(diff), diff))
             except Exception as e:
-                logger.error(e)
+                print(e)
 
 # store evaluation results
 
@@ -64,7 +64,7 @@ df.to_csv('audio/results_full.csv', encoding='utf-8', index=True)
 
 N_PHRASES = len(results[method].keys())
 for method in methods:
-    logger.info("Evaluation - {}".format(method))
+    print("Evaluation - {}".format(method))
     metrics = utils.evaluate_results(results[method].keys(), results[method].values())
     utils.reset_eval_variables()
     metrics['method'] = method
