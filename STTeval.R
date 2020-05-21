@@ -28,13 +28,13 @@ data.timing <- melt(df_timing, id.vars='method')
 
 ggplot() +
   #geom_bar(data=data.accuracy, aes(method,value,fill = variable), width = 0.45, position = position_dodge(width=0.5), stat="identity") +
-  #theme(legend.position="top", legend.title = element_blank()) +
+  theme(legend.position="none", legend.title = element_blank()) +
   labs(x="Speech Recognition engine",y="Inference time / phrase (s)") +
   #scale_fill_discrete(breaks=c("wrr", "wcr"),
                       #labels=c("Word Recognition Rate", "Word Correct Rate")) +
   scale_x_discrete(labels=c("DeepSpeech", "Google", "Houndify", "Sphinx", "Wit")) +
   geom_point(data=data.timing,aes(method,value, color=method), size = 4)
-
+  ggsave("pointplot.png",width = 5, height=4)
 ## BOXPLOT
 
 results_full <- read.csv("audio/results_full.csv")
