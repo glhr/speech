@@ -4,7 +4,7 @@ deepspeech==0.6.1
 pandas==1.0.1
 coloredlogs==10.0
 SpeechRecognition==3.8.1
-numpy==1.18.1
+numpy==1.22.0
 pyttsx3==2.87
 speech==0.5.2
 torch==1.5.0
