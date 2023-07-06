@@ -1,5 +1,5 @@
 asr_evaluation==2.0.4
-scipy==1.4.1
+scipy==1.10.0
 deepspeech==0.6.1
 pandas==1.0.1
 coloredlogs==10.0
